@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 
 public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> implements Serializable {
-    ArrayList<FunctionPoint> list = new ArrayList<>();
+    private final ArrayList<FunctionPoint> list = new ArrayList<>();
 
     public TabAdapter(ArrayTabulatedFunction list) {
         for (int i = 0; i < list.getPointsCount(); i++) {
@@ -55,7 +55,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> i
     }
 
 
-    class TabViewHolder extends RecyclerView.ViewHolder {
+    static class TabViewHolder extends RecyclerView.ViewHolder {
 
         public Button tabulatedButton;
 

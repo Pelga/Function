@@ -15,6 +15,9 @@ import com.google.android.material.button.MaterialButton;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
+    public static final String ARRAY = "array";
+    public static final String NULL = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,18 +30,22 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         material_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (right_domain_border.getText().toString().trim().equals("") || left_domain_border.getText().toString().equals("") || points_count.getText().toString().equals("")) {
+                if (toStr(right_domain_border).trim().equals(NULL) || toStr(left_domain_border).equals(NULL) || toStr(points_count).equals(ARRAY)) {
                     Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_LONG).show();
                 } else {
-                    double l = Double.parseDouble(left_domain_border.getText().toString());
-                    double r = Double.parseDouble(right_domain_border.getText().toString());
-                    int p = Integer.parseInt(points_count.getText().toString());
+                    double l = Double.parseDouble(toStr(left_domain_border));
+                    double r = Double.parseDouble(toStr(right_domain_border));
+                    int p = Integer.parseInt(toStr(points_count));
                     ArrayTabulatedFunction linkedListTabulatedFunction = new ArrayTabulatedFunction(l, r, p);
                     Intent intent = new Intent(MainActivity.this, NewActivity.class);
-                    intent.putExtra("array", linkedListTabulatedFunction);
+                    intent.putExtra(ARRAY, linkedListTabulatedFunction);
                     startActivity(intent);
                 }
             }
         });
+    }
+
+    private String toStr(EditText editText) {
+        return editText.getText().toString();
     }
 }

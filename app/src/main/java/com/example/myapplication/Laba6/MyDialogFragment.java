@@ -16,36 +16,41 @@ import com.example.myapplication.R;
 import java.io.Serializable;
 
 public class MyDialogFragment extends DialogFragment implements Serializable {
-    private EditText x_dialog2;
-    private EditText y_dialog2;
-    Callback callback;
+    private EditText xDialog2;
+    private EditText yDialog2;
+    private Callback callback;
+    public static final String DIALOG_TITLE = "Function point";
+    public static final String CANCEL = "cancel";
+    public static final String OK = "ok";
+    public static final String NULL = "";
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog, null);
         builder.setView(view)
-                .setTitle("Function point")
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                .setTitle(DIALOG_TITLE)
+                .setNegativeButton(CANCEL, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
 
                     }
                 })
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton(OK, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        if (!x_dialog2.getText().toString().trim().equals("") || y_dialog2.getText().toString().equals("")) {
-                            double x = Double.parseDouble(x_dialog2.getText().toString());
-                            double y = Double.parseDouble(y_dialog2.getText().toString());
+                        if (!xDialog2.getText().toString().trim().equals(NULL) || yDialog2.getText().toString().equals(NULL)) {
+                            double x = Double.parseDouble(xDialog2.getText().toString());
+                            double y = Double.parseDouble(yDialog2.getText().toString());
                             FunctionPoint functionPoint = new FunctionPoint(x, y);
                             callback.applyText(functionPoint);
                         }
                     }
                 });
-        x_dialog2 = view.findViewById(R.id.x_dialog2);
-        y_dialog2 = view.findViewById(R.id.y_dialog2);
+        xDialog2 = view.findViewById(R.id.x_dialog2);
+        yDialog2 = view.findViewById(R.id.y_dialog2);
 
         return builder.create();
     }
@@ -56,6 +61,6 @@ public class MyDialogFragment extends DialogFragment implements Serializable {
     }
 
     public interface Callback {
-        public void applyText(FunctionPoint functionPoint);
+        void applyText(FunctionPoint functionPoint);
     }
 }

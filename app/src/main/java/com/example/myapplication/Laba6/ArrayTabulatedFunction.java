@@ -5,8 +5,12 @@ import java.io.Serializable;
 public class ArrayTabulatedFunction implements Serializable {
 
     private FunctionPoint[] arrayFPX;
-    double leftX;
-    double rightX;
+    private double leftX;
+    private double rightX;
+    public static final String OPEN = "{ ";
+    public static final String CLOSE = " }";
+    public static final String COMMA = ", ";
+
 
     public ArrayTabulatedFunction(double leftX, double rightX, int pointsCount) {
         if (leftX >= rightX && pointsCount < 2) {
@@ -27,9 +31,6 @@ public class ArrayTabulatedFunction implements Serializable {
     }
 
     public FunctionPoint getPoint(int index) {
-        //  if (index > arrayFPX.length - 1 || index < 0) {
-        //    throw new FunctionPointIndexOutOfBoundsException();
-        //}
         return arrayFPX[index];
     }
 
@@ -51,7 +52,7 @@ public class ArrayTabulatedFunction implements Serializable {
 
     @Override
     public String toString() {
-        String str = "{ ";
+        String str = OPEN;
         int pointsCount = arrayFPX.length;
         for (int i = 0; i < pointsCount; i++) {
             if (i == pointsCount - 1) {
@@ -60,10 +61,10 @@ public class ArrayTabulatedFunction implements Serializable {
                 }
             } else {
                 if (arrayFPX[i] != null) {
-                    str = str + arrayFPX[i].toString() + ", ";
+                    str = str + arrayFPX[i].toString() + COMMA;
                 }
             }
         }
-        return str + " }";
+        return str + CLOSE;
     }
 }

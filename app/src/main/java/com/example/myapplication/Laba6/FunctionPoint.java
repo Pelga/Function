@@ -5,6 +5,10 @@ import java.io.Serializable;
 public class FunctionPoint implements Serializable {
     private double x;
     private double y;
+    public static final String OPEN = "(";
+    public static final String CLOSE = ")";
+    public static final String SEMICOLON = ";";
+
 
     public FunctionPoint(double x, double y) {
         this.x = x;
@@ -39,7 +43,7 @@ public class FunctionPoint implements Serializable {
 
     @Override
     public String toString() {
-        String str = "(" + getX() + "; " + getY() + ")";
+        String str = OPEN + getX() + SEMICOLON + getY() + CLOSE;
         return str;
     }
 
