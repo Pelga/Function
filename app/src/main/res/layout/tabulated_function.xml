@@ -10,10 +10,10 @@
         android:id="@+id/tabulatedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:backgroundTint="#F1BE06"
         android:text="поинт"
-        android:textSize="50dp"
-         />
+        android:textColor="@color/black"
+        android:textSize="50dp" />
 
 </LinearLayout>
 
