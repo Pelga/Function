@@ -4,20 +4,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.myapplication.R;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 
 public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> implements Serializable {
     ArrayList<FunctionPoint> list = new ArrayList<>();
+
     public TabAdapter(ArrayTabulatedFunction list) {
         for (int i = 0; i < list.getPointsCount(); i++) {
             this.list.add(list.getPoint(i));
         }
     }
+
     @NonNull
     @Override
     public TabViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -53,6 +58,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> i
     class TabViewHolder extends RecyclerView.ViewHolder {
 
         public Button tabulatedButton;
+
         public TabViewHolder(View itemView) {
             super(itemView);
             tabulatedButton = itemView.findViewById(R.id.tabulatedButton);

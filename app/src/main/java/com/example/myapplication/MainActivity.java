@@ -5,21 +5,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.Laba6.ArrayTabulatedFunction;
 import com.example.myapplication.Laba6.NewActivity;
 import com.google.android.material.button.MaterialButton;
+
 import java.io.Serializable;
 
-public class MainActivity extends AppCompatActivity implements  Serializable {
+public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-         EditText left_domain_border = findViewById(R.id.right_domain_border);
-         EditText right_domain_border = findViewById(R.id.left_domain_border);
-         EditText points_count = findViewById(R.id.points_count);
-         MaterialButton material_button;
+        EditText left_domain_border = findViewById(R.id.right_domain_border);
+        EditText right_domain_border = findViewById(R.id.left_domain_border);
+        EditText points_count = findViewById(R.id.points_count);
+        MaterialButton material_button;
         material_button = findViewById(R.id.material_button);
         material_button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint=" x"/>
+        android:hint=" x" />
 
     <EditText
         android:id="@+id/y_dialog2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:hint=" y"/>
+        android:hint=" y" />
 
 </RelativeLayout>

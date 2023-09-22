@@ -64,7 +64,7 @@ public class FunctionPoint implements Serializable {
             long bits = Double.doubleToLongBits(x);
             long bitsY = Double.doubleToLongBits(y);
             return (int) (bits ^ (bits >>> 32)) + (int) (bitsY ^ (bitsY >>> 32));
-        }else {
+        } else {
             return 6666666;
         }
     }

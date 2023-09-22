@@ -1,8 +1,6 @@
 package com.example.myapplication.Laba6;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunction implements Serializable {
     FunctionNode head = new FunctionNode();
@@ -119,6 +117,7 @@ public class LinkedListTabulatedFunction implements Serializable {
         }
         return null;
     }
+
     public double getFunctionValue(double x) {
         if (x >= leftX && x <= rightX) {
             double[] array = returnNumb(x);
@@ -190,16 +189,6 @@ public class LinkedListTabulatedFunction implements Serializable {
         return getPoint(index).getY();
     }
 
-/*
-    public void setPointY(int index, double y) {
-        if (index > getPointsCount() - 1  index < 0) {
-            throw new FunctionPointIndexOutOfBoundsException();
-        }
-        if (index == 0 && y <= getPoint(1).getX() && y >= leftX  index == getPointsCount() - 1 && y >= getPoint(index - 1).getX() && y <= rightX
-        index >= 1 && index <= getPointsCount() - 2 && y >= getPoint(index - 1).getX() && y <= getPoint(index + 1).getX())
-        this.getPoint(index).setY(y);
-    }*/
-
     public void addPoint(FunctionPoint point) {
         int i = 0;
         FunctionNode allLength = head;
@@ -211,7 +200,7 @@ public class LinkedListTabulatedFunction implements Serializable {
     }
 
     /*******************************************************************************************/
-    private static class FunctionNode implements  Serializable{
+    private static class FunctionNode implements Serializable {
         FunctionPoint item;
         FunctionNode next;
         FunctionNode prev;

@@ -1,17 +1,19 @@
 package com.example.myapplication.Laba6;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.Serializable;
-public class NewActivity extends AppCompatActivity implements Serializable{
+
+public class NewActivity extends AppCompatActivity implements Serializable {
     TabAdapter tabAdapter;
 
 
@@ -35,7 +37,8 @@ public class NewActivity extends AppCompatActivity implements Serializable{
             }
         });
     }
-    public void  openDialog(){
+
+    public void openDialog() {
         MyDialogFragment myDialogFragment = new MyDialogFragment();
         myDialogFragment.show(getSupportFragmentManager(), "dialog", new MyDialogFragment.Callback() {
             @Override

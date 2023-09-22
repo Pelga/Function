@@ -1,6 +1,7 @@
 package com.example.myapplication.Laba6;
 
 import java.io.Serializable;
+
 public class ArrayTabulatedFunction implements Serializable {
 
     private FunctionPoint[] arrayFPX;
@@ -26,7 +27,7 @@ public class ArrayTabulatedFunction implements Serializable {
     }
 
     public FunctionPoint getPoint(int index) {
-      //  if (index > arrayFPX.length - 1 || index < 0) {
+        //  if (index > arrayFPX.length - 1 || index < 0) {
         //    throw new FunctionPointIndexOutOfBoundsException();
         //}
         return arrayFPX[index];
