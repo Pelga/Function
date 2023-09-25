@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.Constants.ARRAY_1;
+import static com.example.myapplication.Constants.NULL_1;
+import static com.example.myapplication.Laba6.MyString.toStr;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,37 +19,31 @@ import com.google.android.material.button.MaterialButton;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
-    public static final String ARRAY = "array";
-    public static final String NULL = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText left_domain_border = findViewById(R.id.right_domain_border);
-        EditText right_domain_border = findViewById(R.id.left_domain_border);
-        EditText points_count = findViewById(R.id.points_count);
-        MaterialButton material_button;
-        material_button = findViewById(R.id.material_button);
-        material_button.setOnClickListener(new View.OnClickListener() {
+        EditText leftDomainBorder = findViewById(R.id.right_domain_border);
+        EditText rightDomainBorder = findViewById(R.id.left_domain_border);
+        EditText pointsCount = findViewById(R.id.points_count);
+        MaterialButton materialButton = findViewById(R.id.material_button);
+        materialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (toStr(right_domain_border).trim().equals(NULL) || toStr(left_domain_border).equals(NULL) || toStr(points_count).equals(ARRAY)) {
+                if (toStr(rightDomainBorder).trim().equals(NULL_1) || toStr(leftDomainBorder).equals(NULL_1) || toStr(pointsCount).equals(ARRAY_1)) {
                     Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_LONG).show();
                 } else {
-                    double l = Double.parseDouble(toStr(left_domain_border));
-                    double r = Double.parseDouble(toStr(right_domain_border));
-                    int p = Integer.parseInt(toStr(points_count));
+                    double l = Double.parseDouble(toStr(leftDomainBorder));
+                    double r = Double.parseDouble(toStr(rightDomainBorder));
+                    int p = Integer.parseInt(toStr(pointsCount));
                     ArrayTabulatedFunction linkedListTabulatedFunction = new ArrayTabulatedFunction(l, r, p);
                     Intent intent = new Intent(MainActivity.this, NewActivity.class);
-                    intent.putExtra(ARRAY, linkedListTabulatedFunction);
+                    intent.putExtra(ARRAY_1, linkedListTabulatedFunction);
                     startActivity(intent);
                 }
             }
         });
-    }
-
-    private String toStr(EditText editText) {
-        return editText.getText().toString();
     }
 }

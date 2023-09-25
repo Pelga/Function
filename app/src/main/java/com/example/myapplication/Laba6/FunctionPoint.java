@@ -1,14 +1,14 @@
 package com.example.myapplication.Laba6;
 
+import static com.example.myapplication.Constants.CLOSE_1;
+import static com.example.myapplication.Constants.OPEN_1;
+import static com.example.myapplication.Constants.SEMICOLON;
+
 import java.io.Serializable;
 
 public class FunctionPoint implements Serializable {
     private double x;
     private double y;
-    public static final String OPEN = "(";
-    public static final String CLOSE = ")";
-    public static final String SEMICOLON = ";";
-
 
     public FunctionPoint(double x, double y) {
         this.x = x;
@@ -43,7 +43,7 @@ public class FunctionPoint implements Serializable {
 
     @Override
     public String toString() {
-        String str = OPEN + getX() + SEMICOLON + getY() + CLOSE;
+        String str = OPEN_1 + getX() + SEMICOLON + getY() + CLOSE_1;
         return str;
     }
 

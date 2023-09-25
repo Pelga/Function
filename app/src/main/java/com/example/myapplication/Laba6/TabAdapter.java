@@ -57,7 +57,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> i
 
     static class TabViewHolder extends RecyclerView.ViewHolder {
 
-        public Button tabulatedButton;
+        private final Button tabulatedButton;
 
         public TabViewHolder(View itemView) {
             super(itemView);

@@ -1,5 +1,9 @@
 package com.example.myapplication.Laba6;
 
+import static com.example.myapplication.Constants.CLOSE;
+import static com.example.myapplication.Constants.COMMA;
+import static com.example.myapplication.Constants.OPEN;
+
 import java.io.Serializable;
 
 public class ArrayTabulatedFunction implements Serializable {
@@ -7,9 +11,6 @@ public class ArrayTabulatedFunction implements Serializable {
     private FunctionPoint[] arrayFPX;
     private double leftX;
     private double rightX;
-    public static final String OPEN = "{ ";
-    public static final String CLOSE = " }";
-    public static final String COMMA = ", ";
 
 
     public ArrayTabulatedFunction(double leftX, double rightX, int pointsCount) {

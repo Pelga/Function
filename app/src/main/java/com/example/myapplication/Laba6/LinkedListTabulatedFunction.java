@@ -1,17 +1,19 @@
 package com.example.myapplication.Laba6;
 
+import static com.example.myapplication.Constants.CLOSE_2;
+import static com.example.myapplication.Constants.COMMA_1;
+import static com.example.myapplication.Constants.OPEN_2;
+
 import java.io.Serializable;
 
 public class LinkedListTabulatedFunction implements Serializable {
-    FunctionNode head = new FunctionNode();
+    private FunctionNode head = new FunctionNode();
     private int lastIndex = -1;
     private double leftX;
     private double rightX;
 
     private double[] values;
-    public static final String OPEN = "{";
-    public static final String CLOSE = "}";
-    public static final String COMMA = ", ";
+
 
     public LinkedListTabulatedFunction(FunctionPoint[] array) {
         int pointsCount = array.length;
@@ -158,11 +160,11 @@ public class LinkedListTabulatedFunction implements Serializable {
 
     /*******************************************************************************************/
     private static class FunctionNode implements Serializable {
-        FunctionPoint item;
-        FunctionNode next;
-        FunctionNode prev;
+        private FunctionPoint item;
+        private FunctionNode next;
+        private FunctionNode prev;
 
-        int index;
+        private int index;
 
         public FunctionNode() {
             this.index = 0;
@@ -250,11 +252,11 @@ public class LinkedListTabulatedFunction implements Serializable {
 
     @Override
     public String toString() {
-        String str = OPEN;
+        String str = OPEN_2;
         FunctionNode tail = head;
         while (tail.next != null) {
             if (tail.next.next != null) {
-                str = str + tail.item.toString() + COMMA;
+                str = str + tail.item.toString() + COMMA_1;
                 tail = tail.next;
             } else {
                 str = str + tail.item.toString();
@@ -262,7 +264,7 @@ public class LinkedListTabulatedFunction implements Serializable {
             }
         }
         tail.item = new FunctionPoint();
-        return str + CLOSE;
+        return str + CLOSE_2;
     }
 
     @Override
