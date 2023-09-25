@@ -1,8 +1,9 @@
 package com.example.myapplication.Laba6;
 
-import static com.example.myapplication.Constants.CLOSE_2;
-import static com.example.myapplication.Constants.COMMA_1;
-import static com.example.myapplication.Constants.OPEN_2;
+
+import static com.example.myapplication.Constants.CLOSE_ANOTHER;
+import static com.example.myapplication.Constants.COMMA;
+import static com.example.myapplication.Constants.OPEN_ANOTHER;
 
 import java.io.Serializable;
 
@@ -252,11 +253,11 @@ public class LinkedListTabulatedFunction implements Serializable {
 
     @Override
     public String toString() {
-        String str = OPEN_2;
+        String str = OPEN_ANOTHER;
         FunctionNode tail = head;
         while (tail.next != null) {
             if (tail.next.next != null) {
-                str = str + tail.item.toString() + COMMA_1;
+                str = str + tail.item.toString() + COMMA;
                 tail = tail.next;
             } else {
                 str = str + tail.item.toString();
@@ -264,7 +265,7 @@ public class LinkedListTabulatedFunction implements Serializable {
             }
         }
         tail.item = new FunctionPoint();
-        return str + CLOSE_2;
+        return str + CLOSE_ANOTHER;
     }
 
     @Override

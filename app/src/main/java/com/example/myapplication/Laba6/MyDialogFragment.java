@@ -26,7 +26,6 @@ public class MyDialogFragment extends DialogFragment implements Serializable {
     private EditText yDialog2;
     private Callback callback;
 
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

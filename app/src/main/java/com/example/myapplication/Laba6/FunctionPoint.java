@@ -1,7 +1,7 @@
 package com.example.myapplication.Laba6;
 
-import static com.example.myapplication.Constants.CLOSE_1;
-import static com.example.myapplication.Constants.OPEN_1;
+import static com.example.myapplication.Constants.CLOSE_ANOTHER;
+import static com.example.myapplication.Constants.OPEN_ANOTHER;
 import static com.example.myapplication.Constants.SEMICOLON;
 
 import java.io.Serializable;
@@ -43,7 +43,7 @@ public class FunctionPoint implements Serializable {
 
     @Override
     public String toString() {
-        String str = OPEN_1 + getX() + SEMICOLON + getY() + CLOSE_1;
+        String str = OPEN_ANOTHER + getX() + SEMICOLON + getY() + CLOSE_ANOTHER;
         return str;
     }
 

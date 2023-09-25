@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.Constants.ARRAY_1;
-import static com.example.myapplication.Constants.NULL_1;
+import static com.example.myapplication.Constants.ARRAY;
+import static com.example.myapplication.Constants.NULL;
 import static com.example.myapplication.Laba6.MyString.toStr;
 
 import android.content.Intent;
@@ -20,7 +20,6 @@ import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         materialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (toStr(rightDomainBorder).trim().equals(NULL_1) || toStr(leftDomainBorder).equals(NULL_1) || toStr(pointsCount).equals(ARRAY_1)) {
+                if (toStr(rightDomainBorder).trim().equals(NULL) || toStr(leftDomainBorder).equals(NULL) || toStr(pointsCount).equals(ARRAY)) {
                     Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_LONG).show();
                 } else {
                     double l = Double.parseDouble(toStr(leftDomainBorder));
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     int p = Integer.parseInt(toStr(pointsCount));
                     ArrayTabulatedFunction linkedListTabulatedFunction = new ArrayTabulatedFunction(l, r, p);
                     Intent intent = new Intent(MainActivity.this, NewActivity.class);
-                    intent.putExtra(ARRAY_1, linkedListTabulatedFunction);
+                    intent.putExtra(ARRAY, linkedListTabulatedFunction);
                     startActivity(intent);
                 }
             }

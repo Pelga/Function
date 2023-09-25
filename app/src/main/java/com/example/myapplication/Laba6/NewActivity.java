@@ -18,7 +18,6 @@ import java.io.Serializable;
 public class NewActivity extends AppCompatActivity implements Serializable {
     private TabAdapter tabAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
