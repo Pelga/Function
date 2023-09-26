@@ -1,5 +1,9 @@
 package com.example.myapplication.Laba6;
 
+import static com.example.myapplication.Constants.CLOSE_ANOTHER;
+import static com.example.myapplication.Constants.OPEN_ANOTHER;
+import static com.example.myapplication.Constants.SEMICOLON;
+
 import java.io.Serializable;
 
 public class FunctionPoint implements Serializable {
@@ -39,7 +43,7 @@ public class FunctionPoint implements Serializable {
 
     @Override
     public String toString() {
-        String str = "(" + getX() + "; " + getY() + ")";
+        String str = OPEN_ANOTHER + getX() + SEMICOLON + getY() + CLOSE_ANOTHER;
         return str;
     }
 
@@ -64,7 +68,7 @@ public class FunctionPoint implements Serializable {
             long bits = Double.doubleToLongBits(x);
             long bitsY = Double.doubleToLongBits(y);
             return (int) (bits ^ (bits >>> 32)) + (int) (bitsY ^ (bitsY >>> 32));
-        }else {
+        } else {
             return 6666666;
         }
     }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 
 public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> implements Serializable {
-    ArrayList<FunctionPoint> list = new ArrayList<>();
+    private final ArrayList<FunctionPoint> list = new ArrayList<>();
 
     public TabAdapter(ArrayTabulatedFunction list) {
         for (int i = 0; i < list.getPointsCount(); i++) {
@@ -23,13 +23,11 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> i
         }
     }
 
-
     @NonNull
     @Override
     public TabViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.tabulated_function, viewGroup, false);
-
         return new TabViewHolder(view);
     }
 
@@ -51,10 +49,15 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> i
         notifyDataSetChanged();
     }
 
-    class TabViewHolder extends RecyclerView.ViewHolder {
+    public void add(FunctionPoint functionPoint) {
+        list.add(functionPoint);
+        notifyDataSetChanged();
+    }
 
-        public Button tabulatedButton;
 
+    static class TabViewHolder extends RecyclerView.ViewHolder {
+
+        private final Button tabulatedButton;
 
         public TabViewHolder(View itemView) {
             super(itemView);
@@ -66,4 +69,5 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> i
         }
     }
 }
+
 

@@ -1,16 +1,20 @@
 package com.example.myapplication.Laba6;
 
+
+import static com.example.myapplication.Constants.CLOSE_ANOTHER;
+import static com.example.myapplication.Constants.COMMA;
+import static com.example.myapplication.Constants.OPEN_ANOTHER;
+
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunction implements Serializable {
-    FunctionNode head = new FunctionNode();
-    int lastIndex = -1;
-    double leftX;
-    double rightX;
+    private FunctionNode head = new FunctionNode();
+    private int lastIndex = -1;
+    private double leftX;
+    private double rightX;
 
-    double[] values;
+    private double[] values;
+
 
     public LinkedListTabulatedFunction(FunctionPoint[] array) {
         int pointsCount = array.length;
@@ -80,25 +84,6 @@ public class LinkedListTabulatedFunction implements Serializable {
     }
 
 
-  /*  public static class LinkedListTabulatedFunctionFactory implements TabulatedFunctionFactory {
-        @Override
-        public TabulatedFunction<FunctionPoint> createTabulatedFunction(FunctionPoint[] array) {
-            return new LinkedListTabulatedFunction(array);
-        }
-
-        @Override
-        public TabulatedFunction<FunctionPoint> createTabulatedFunction(double leftX, double rightX, int pointsCount) {
-            return new LinkedListTabulatedFunction(leftX, rightX, pointsCount);
-        }
-
-        @Override
-        public TabulatedFunction<FunctionPoint> createTabulatedFunction(double leftX, double rightX, double[] values) {
-            return new LinkedListTabulatedFunction(leftX, rightX, values);
-        }
-    }
-*/
-
-
     public double getLeftDomainBorder() {
         return leftX;
     }
@@ -119,6 +104,7 @@ public class LinkedListTabulatedFunction implements Serializable {
         }
         return null;
     }
+
     public double getFunctionValue(double x) {
         if (x >= leftX && x <= rightX) {
             double[] array = returnNumb(x);
@@ -145,9 +131,6 @@ public class LinkedListTabulatedFunction implements Serializable {
     public FunctionPoint getPoint(int index) {
         FunctionNode allLength = head;
         int i = 0;
-      /*  if (index > getPointsCount() - 1  index < 0) {
-            throw new FunctionPointIndexOutOfBoundsException();
-        }*/
 
         while (i < index) {
             i++;
@@ -157,48 +140,14 @@ public class LinkedListTabulatedFunction implements Serializable {
     }
 
 
-  /*  public void setPoint(int index, FunctionPoint point) {
-     /*   if (index > getPointsCount() - 1  index < 0  point.getX() < leftX  point.getX() > rightX) {
-            throw new FunctionPointIndexOutOfBoundsException();
-        }
-        if (index == 0 && point.getX() <= getPoint(1).getX() && point.getX() >= leftX
-        index == getPointsCount() - 1 && point.getX() >= getPoint(index - 1).getX() && point.getX() <= rightX
-        index >= 1 && index <= getPointsCount() - 2 && point.getX() >= getPoint(index - 1).getX() && point.getX() <= getPoint(index + 1).getX()) {
-            this.getPoint(index).setX(point.getX());
-        }
-    } */
-
-
     public double getPointX(int index) {
         return getPoint(index).getX();
     }
-
- /*   public void setPointX(int index, double x) {
-        if (index > getPointsCount() - 1  index < 0  x > rightX  x < leftX) {
-            throw new FunctionPointIndexOutOfBoundsException();
-        }
-        if (index == 0 && x <= getPoint(1).getX() && x >= leftX  index == getPointsCount() - 1 && x >= getPoint(index - 1).getX() && x <= rightX
-        index >= 1 && index <= getPointsCount() - 2 && x >= getPoint(index - 1).getX() && x <= getPoint(index + 1).getX()) {
-            this.getPoint(index).setX(x);
-        } else {
-            throw new InappropriateFunctionPointException();
-        }
-    }*/
 
 
     public double getPointY(int index) {
         return getPoint(index).getY();
     }
-
-/*
-    public void setPointY(int index, double y) {
-        if (index > getPointsCount() - 1  index < 0) {
-            throw new FunctionPointIndexOutOfBoundsException();
-        }
-        if (index == 0 && y <= getPoint(1).getX() && y >= leftX  index == getPointsCount() - 1 && y >= getPoint(index - 1).getX() && y <= rightX
-        index >= 1 && index <= getPointsCount() - 2 && y >= getPoint(index - 1).getX() && y <= getPoint(index + 1).getX())
-        this.getPoint(index).setY(y);
-    }*/
 
     public void addPoint(FunctionPoint point) {
         int i = 0;
@@ -211,12 +160,12 @@ public class LinkedListTabulatedFunction implements Serializable {
     }
 
     /*******************************************************************************************/
-    private static class FunctionNode implements  Serializable{
-        FunctionPoint item;
-        FunctionNode next;
-        FunctionNode prev;
+    private static class FunctionNode implements Serializable {
+        private FunctionPoint item;
+        private FunctionNode next;
+        private FunctionNode prev;
 
-        int index;
+        private int index;
 
         public FunctionNode() {
             this.index = 0;
@@ -304,11 +253,11 @@ public class LinkedListTabulatedFunction implements Serializable {
 
     @Override
     public String toString() {
-        String str = "{";
+        String str = OPEN_ANOTHER;
         FunctionNode tail = head;
         while (tail.next != null) {
             if (tail.next.next != null) {
-                str = str + tail.item.toString() + ", ";
+                str = str + tail.item.toString() + COMMA;
                 tail = tail.next;
             } else {
                 str = str + tail.item.toString();
@@ -316,33 +265,8 @@ public class LinkedListTabulatedFunction implements Serializable {
             }
         }
         tail.item = new FunctionPoint();
-        return str + "}";
+        return str + CLOSE_ANOTHER;
     }
-
- /*   @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o.getClass() != this.getClass() && o.getClass() != ArrayTabulatedFunction.class) {
-            return false;
-        }
-        TabulatedFunction c = (TabulatedFunction) o;
-        FunctionNode tail = head;
-        int i = 0;
-        if (Double.compare(leftX, c.getLeftDomainBorder()) == 0 && Double.compare(rightX, c.getRightDomainBorder()) == 0) {
-            while (tail.next != null) {
-                if (!tail.item.equals(c.getPoint(i))) {
-                    return false;
-                }
-                tail = tail.next;
-                i++;
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }*/
 
     @Override
     public int hashCode() {
