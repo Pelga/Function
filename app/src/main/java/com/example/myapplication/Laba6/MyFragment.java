@@ -18,7 +18,7 @@ import java.io.Serializable;
 
 public class MyFragment extends Fragment implements Serializable {
     private TabAdapter tabAdapter;
-    private ArrayTabulatedFunction array;
+    private final ArrayTabulatedFunction array;
 
     public MyFragment(ArrayTabulatedFunction array) {
         this.array = array;

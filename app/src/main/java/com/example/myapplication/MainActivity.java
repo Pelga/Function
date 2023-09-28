@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FragmentManager fragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
         CardView cardView = findViewById(R.id.card);
         EditText leftDomainBorder = findViewById(R.id.right_domain_border);
@@ -39,20 +38,29 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 if (toStr(rightDomainBorder).trim().equals(NULL) || toStr(leftDomainBorder).equals(NULL) || toStr(pointsCount).equals(ARRAY)) {
                     Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_LONG).show();
                 } else {
-                    if (view != null) {
-                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    }
+                    closeKeyboard(view);
                     cardView.setVisibility(View.INVISIBLE);
                     double l = Double.parseDouble(toStr(leftDomainBorder));
                     double r = Double.parseDouble(toStr(rightDomainBorder));
                     int p = Integer.parseInt(toStr(pointsCount));
                     ArrayTabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(l, r, p);
-                    MyFragment fragment = new MyFragment(arrayTabulatedFunction);
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, fragment)
-                            .commit();
+                    openFragment(arrayTabulatedFunction);
                 }
+            }
+
+            private void closeKeyboard(View view) {
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+            }
+
+            private void openFragment(ArrayTabulatedFunction arrayTabulatedFunction) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                MyFragment fragment = new MyFragment(arrayTabulatedFunction);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
             }
         });
     }
