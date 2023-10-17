@@ -18,10 +18,16 @@ import java.io.Serializable;
 
 public class MyFragment extends Fragment implements Serializable {
     private TabAdapter tabAdapter;
-    private final ArrayTabulatedFunction array;
+    private ArrayTabulatedFunction array;
+    private MyDialogFragment myDialogFragment;
+    public static final String MY_KEY_ARRAY = "myKeyArrayTabulatedFunction";
+
 
     public MyFragment(ArrayTabulatedFunction array) {
         this.array = array;
+    }
+
+    public MyFragment() {
     }
 
     @Override
@@ -30,10 +36,14 @@ public class MyFragment extends Fragment implements Serializable {
         View view = inflater.inflate(R.layout.fragment_my, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view2);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if (savedInstanceState != null && array == null) {
+            array = (ArrayTabulatedFunction) savedInstanceState.getSerializable(MY_KEY_ARRAY);
+            assert array != null;
+        }
         tabAdapter = new TabAdapter(array);
         recyclerView.setAdapter(tabAdapter);
-        assert array != null;
         FloatingActionButton addButton = view.findViewById(R.id.add_button);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,13 +54,31 @@ public class MyFragment extends Fragment implements Serializable {
     }
 
     public void openDialog() {
-        MyDialogFragment myDialogFragment = new MyDialogFragment();
+        myDialogFragment = new MyDialogFragment();
         myDialogFragment.show(getChildFragmentManager(), DIALOG, new MyDialogFragment.Callback() {
             @Override
             public void applyText(FunctionPoint functionPoint) {
                 tabAdapter.add(functionPoint);
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        closeDialog();
+        super.onPause();
+    }
+
+    public void closeDialog() {
+        if (myDialogFragment != null) {
+            myDialogFragment.dismiss();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putSerializable(MY_KEY_ARRAY, tabAdapter.getMyArrayTabulatedFunction());
     }
 }
 

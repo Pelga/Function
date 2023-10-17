@@ -22,6 +22,9 @@ import com.google.android.material.button.MaterialButton;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
+    private boolean isClosed = false;
+    public static final String MY_KEY_CLOSED = "myKeyClosed";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         EditText rightDomainBorder = findViewById(R.id.left_domain_border);
         EditText pointsCount = findViewById(R.id.points_count);
         MaterialButton materialButton = findViewById(R.id.material_button);
+        if (savedInstanceState != null) {
+            isClosed = savedInstanceState.getBoolean(MY_KEY_CLOSED);
+            if (isClosed) {
+                cardView.setVisibility(View.INVISIBLE);
+            } else {
+                cardView.setVisibility(View.VISIBLE);
+            }
+        }
         materialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 } else {
                     closeKeyboard(view);
                     cardView.setVisibility(View.INVISIBLE);
+                    isClosed = true;
                     double l = Double.parseDouble(toStr(leftDomainBorder));
                     double r = Double.parseDouble(toStr(rightDomainBorder));
                     int p = Integer.parseInt(toStr(pointsCount));
@@ -63,5 +75,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         .commit();
             }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBoolean(MY_KEY_CLOSED, isClosed);
     }
 }

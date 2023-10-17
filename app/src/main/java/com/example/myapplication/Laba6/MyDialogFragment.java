@@ -36,7 +36,6 @@ public class MyDialogFragment extends DialogFragment implements Serializable {
                 .setNegativeButton(CANCEL, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-
                     }
                 })
                 .setPositiveButton(OK, new DialogInterface.OnClickListener() {

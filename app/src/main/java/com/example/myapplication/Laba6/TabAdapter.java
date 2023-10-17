@@ -15,12 +15,18 @@ import java.util.ArrayList;
 
 
 public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> implements Serializable {
-    private final ArrayList<FunctionPoint> list = new ArrayList<>();
+    private ArrayList<FunctionPoint> list = new ArrayList<>();
 
     public TabAdapter(ArrayTabulatedFunction list) {
         for (int i = 0; i < list.getPointsCount(); i++) {
             this.list.add(list.getPoint(i));
         }
+    }
+
+    public ArrayTabulatedFunction getMyArrayTabulatedFunction() {
+        FunctionPoint[] array = new FunctionPoint[list.size()];
+        array = list.toArray(array);
+        return new ArrayTabulatedFunction(array);
     }
 
     @NonNull
