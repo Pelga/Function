@@ -60,7 +60,7 @@ public class MyDialogFragment extends DialogFragment implements Serializable {
         this.callback = callback;
     }
 
-    public interface Callback extends Serializable {
+    public interface Callback {
         void applyText(FunctionPoint functionPoint);
     }
 }

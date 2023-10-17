@@ -20,6 +20,8 @@ public class MyFragment extends Fragment implements Serializable {
     private TabAdapter tabAdapter;
     private ArrayTabulatedFunction array;
     private MyDialogFragment myDialogFragment;
+    public static final String MY_KEY_ARRAY = "myKeyArrayTabulatedFunction";
+
 
     public MyFragment(ArrayTabulatedFunction array) {
         this.array = array;
@@ -34,15 +36,11 @@ public class MyFragment extends Fragment implements Serializable {
         View view = inflater.inflate(R.layout.fragment_my, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view2);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if (array != null) {
-            tabAdapter = new TabAdapter(array);
-        } else {
-            if (savedInstanceState != null) {
-                array = (ArrayTabulatedFunction) savedInstanceState.getSerializable("myKeyArrayTabulatedFunction");
-                assert array != null;
-                tabAdapter = new TabAdapter(array);
-            }
+        if (savedInstanceState != null && array == null) {
+            array = (ArrayTabulatedFunction) savedInstanceState.getSerializable(MY_KEY_ARRAY);
+            assert array != null;
         }
+        tabAdapter = new TabAdapter(array);
         recyclerView.setAdapter(tabAdapter);
         FloatingActionButton addButton = view.findViewById(R.id.add_button);
 
@@ -80,7 +78,7 @@ public class MyFragment extends Fragment implements Serializable {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putSerializable("myKeyArrayTabulatedFunction", tabAdapter.getMyArrayTabulatedFunction());
+        savedInstanceState.putSerializable(MY_KEY_ARRAY, tabAdapter.getMyArrayTabulatedFunction());
     }
 }
 

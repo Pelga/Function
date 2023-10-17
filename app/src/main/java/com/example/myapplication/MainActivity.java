@@ -22,7 +22,9 @@ import com.google.android.material.button.MaterialButton;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
-    boolean isClosed = false;
+    private boolean isClosed = false;
+    public static final String MY_KEY_CLOSED = "myKeyClosed";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         EditText pointsCount = findViewById(R.id.points_count);
         MaterialButton materialButton = findViewById(R.id.material_button);
         if (savedInstanceState != null) {
-            isClosed = savedInstanceState.getBoolean("myKeyClosed");
+            isClosed = savedInstanceState.getBoolean(MY_KEY_CLOSED);
             if (isClosed) {
                 cardView.setVisibility(View.INVISIBLE);
             } else {
@@ -78,6 +80,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putBoolean("myKeyClosed", isClosed);
+        savedInstanceState.putBoolean(MY_KEY_CLOSED, isClosed);
     }
 }
