@@ -31,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
     private boolean isClosed = false;
-    public static final String MY_KEY_CLOSED = "myKeyClosed";
+    private static final String MY_KEY_CLOSED = "myKeyClosed";
     private static final String BASE_URL = "https://run.mocky.io/";
     private MyDateNumbers data;
 
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 MyAPI apiService = retrofit.create(MyAPI.class);
-                Call<MyDateNumbers> call = apiService.getYourData();
+                Call<MyDateNumbers> call = apiService.getMyData();
                 call.enqueue(new Callback<MyDateNumbers>() {
                     @Override
                     public void onResponse(Call<MyDateNumbers> call, Response<MyDateNumbers> response) {
