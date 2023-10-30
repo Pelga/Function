@@ -4,10 +4,14 @@ import static com.example.myapplication.Constants.CLOSE_ANOTHER;
 import static com.example.myapplication.Constants.OPEN_ANOTHER;
 import static com.example.myapplication.Constants.SEMICOLON;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class FunctionPoint implements Serializable {
+    @SerializedName("x")
     private double x;
+    @SerializedName("y")
     private double y;
 
     public FunctionPoint(double x, double y) {

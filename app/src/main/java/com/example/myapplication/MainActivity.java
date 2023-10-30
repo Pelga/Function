@@ -16,15 +16,24 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.myapplication.Laba6.ArrayTabulatedFunction;
+import com.example.myapplication.Laba6.MyAPI;
+import com.example.myapplication.Laba6.MyDateNumbers;
 import com.example.myapplication.Laba6.MyFragment;
 import com.google.android.material.button.MaterialButton;
 
 import java.io.Serializable;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity implements Serializable {
     private boolean isClosed = false;
-    public static final String MY_KEY_CLOSED = "myKeyClosed";
-
+    private static final String MY_KEY_CLOSED = "myKeyClosed";
+    private static final String BASE_URL = "https://run.mocky.io/";
+    private MyDateNumbers data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         EditText rightDomainBorder = findViewById(R.id.left_domain_border);
         EditText pointsCount = findViewById(R.id.points_count);
         MaterialButton materialButton = findViewById(R.id.material_button);
+        MaterialButton materialButtonGenerate = findViewById(R.id.material_button_generate);
         if (savedInstanceState != null) {
             isClosed = savedInstanceState.getBoolean(MY_KEY_CLOSED);
             if (isClosed) {
@@ -59,27 +69,59 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     openFragment(arrayTabulatedFunction);
                 }
             }
+        });
 
-            private void closeKeyboard(View view) {
-                if (view != null) {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                }
-            }
+        materialButtonGenerate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeKeyboard(view);
+                cardView.setVisibility(View.INVISIBLE);
+                isClosed = true;
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                MyAPI apiService = retrofit.create(MyAPI.class);
+                Call<MyDateNumbers> call = apiService.getMyData();
+                call.enqueue(new Callback<MyDateNumbers>() {
+                    @Override
+                    public void onResponse(Call<MyDateNumbers> call, Response<MyDateNumbers> response) {
+                        if (response.isSuccessful()) {
+                            data = response.body();
+                            assert data != null;
+                            ArrayTabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(data.getNumbers());
+                            openFragment(arrayTabulatedFunction);
+                        }
+                    }
 
-            private void openFragment(ArrayTabulatedFunction arrayTabulatedFunction) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                MyFragment fragment = new MyFragment(arrayTabulatedFunction);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .commit();
+                    @Override
+                    public void onFailure(Call<MyDateNumbers> call, Throwable t) {
+                        call.cancel();
+                    }
+                });
             }
         });
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBoolean(MY_KEY_CLOSED, isClosed);
+    }
+
+    private void closeKeyboard(View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    private void openFragment(ArrayTabulatedFunction arrayTabulatedFunction) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        MyFragment fragment = new MyFragment(arrayTabulatedFunction);
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 }
