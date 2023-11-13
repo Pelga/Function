@@ -1,5 +1,6 @@
 package com.example.myapplication.Laba6;
 
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,13 @@ import com.example.myapplication.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> implements Serializable {
     private ArrayList<FunctionPoint> list = new ArrayList<>();
+    MyDatabase database = App.getInstance().getDatabase();
+    MyDao dao = database.myDao();
 
     public TabAdapter(ArrayTabulatedFunction list) {
         for (int i = 0; i < list.getPointsCount(); i++) {
@@ -55,11 +59,14 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> i
         notifyDataSetChanged();
     }
 
+    public ArrayList<FunctionPoint> getList() {
+        return list;
+    }
+
     public void add(FunctionPoint functionPoint) {
         list.add(functionPoint);
         notifyDataSetChanged();
     }
-
 
     static class TabViewHolder extends RecyclerView.ViewHolder {
 

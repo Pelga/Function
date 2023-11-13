@@ -1,17 +1,23 @@
 package com.example.myapplication.Laba6;
 
+import static com.example.myapplication.Constants.ARRAY;
 import static com.example.myapplication.Constants.DIALOG;
+import static com.example.myapplication.Constants.NULL;
+import static com.example.myapplication.Laba6.MyString.toStr;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -60,13 +66,12 @@ public class MyFragment extends Fragment implements Serializable {
             public void onClick(View view) {
                 MyDatabase database = App.getInstance().getDatabase();
                 MyDao dao = database.myDao();
-                toList(array).forEach(functionPoint -> {
-                    MyEntity entity = new MyEntity(functionPoint.getX(), functionPoint.getY());
+                for (int i = 0; i < tabAdapter.getList().size(); i++){
+                    MyEntity entity = new MyEntity(tabAdapter.getList().get(i).getX(), tabAdapter.getList().get(i).getY());
                     dao.insert(entity);
-                });
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .remove(MyFragment.this)
-                        .commit();
+                }
+                Activity activity = getActivity();
+                Toast.makeText(activity, R.string.saved, Toast.LENGTH_LONG).show();
             }
         });
         return view;
