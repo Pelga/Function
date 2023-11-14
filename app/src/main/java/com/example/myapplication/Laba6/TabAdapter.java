@@ -13,13 +13,10 @@ import com.example.myapplication.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> implements Serializable {
     private ArrayList<FunctionPoint> list = new ArrayList<>();
-    MyDatabase database = App.getInstance().getDatabase();
-    MyDao dao = database.myDao();
 
     public TabAdapter(ArrayTabulatedFunction list) {
         for (int i = 0; i < list.getPointsCount(); i++) {

@@ -14,12 +14,6 @@ public interface MyDao {
     @Query("SELECT * FROM your_table_name")
     List<MyEntity> getAll();
 
-    @Query("SELECT * FROM your_table_name WHERE x = :id")
-    MyEntity getById(double id);
-
-    @Query("DELETE from your_table_name WHERE x = :id")
-    int deleteById(double id);
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(MyEntity entity);
 

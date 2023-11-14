@@ -1,9 +1,6 @@
 package com.example.myapplication.Laba6;
 
-import static com.example.myapplication.Constants.ARRAY;
 import static com.example.myapplication.Constants.DIALOG;
-import static com.example.myapplication.Constants.NULL;
-import static com.example.myapplication.Laba6.MyString.toStr;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,21 +14,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class MyFragment extends Fragment implements Serializable {
     private TabAdapter tabAdapter;
     private ArrayTabulatedFunction array;
     private MyDialogFragment myDialogFragment;
     public static final String MY_KEY_ARRAY = "myKeyArrayTabulatedFunction";
-
 
     public MyFragment(ArrayTabulatedFunction array) {
         this.array = array;
@@ -66,8 +59,9 @@ public class MyFragment extends Fragment implements Serializable {
             public void onClick(View view) {
                 MyDatabase database = App.getInstance().getDatabase();
                 MyDao dao = database.myDao();
-                for (int i = 0; i < tabAdapter.getList().size(); i++){
-                    MyEntity entity = new MyEntity(tabAdapter.getList().get(i).getX(), tabAdapter.getList().get(i).getY());
+                ArrayList<FunctionPoint> tabList = tabAdapter.getList();
+                for (int i = 0; i < tabList.size(); i++) {
+                    MyEntity entity = new MyEntity(tabList.get(i).getX(), tabList.get(i).getY());
                     dao.insert(entity);
                 }
                 Activity activity = getActivity();
@@ -91,14 +85,6 @@ public class MyFragment extends Fragment implements Serializable {
     public void onPause() {
         closeDialog();
         super.onPause();
-    }
-
-    public List<FunctionPoint> toList(ArrayTabulatedFunction list) {
-        List<FunctionPoint> list1 = new ArrayList<>();
-        for (int i = 0; i < list.getPointsCount(); i++) {
-            list1.add(list.getPoint(i));
-        }
-        return list1;
     }
 
     public void closeDialog() {

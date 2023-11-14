@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.room.Room;
 
 public class App extends Application {
-    public static App instance;
+    private static App instance;
 
     private MyDatabase database;
 
