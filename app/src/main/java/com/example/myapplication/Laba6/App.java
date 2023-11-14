@@ -1,5 +1,7 @@
 package com.example.myapplication.Laba6;
 
+import static com.example.myapplication.Constants.DATABASE;
+
 import android.app.Application;
 
 import androidx.room.Room;
@@ -13,7 +15,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        database = Room.databaseBuilder(this, MyDatabase.class, "database").allowMainThreadQueries().build();
+        database = Room.databaseBuilder(this, MyDatabase.class, DATABASE).allowMainThreadQueries().build();
     }
 
     public static App getInstance() {
