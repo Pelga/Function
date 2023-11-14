@@ -15,13 +15,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.myapplication.Laba6.App;
 import com.example.myapplication.Laba6.ArrayTabulatedFunction;
+import com.example.myapplication.Laba6.FunctionPoint;
 import com.example.myapplication.Laba6.MyAPI;
+import com.example.myapplication.Laba6.MyDao;
+import com.example.myapplication.Laba6.MyDatabase;
 import com.example.myapplication.Laba6.MyDateNumbers;
+import com.example.myapplication.Laba6.MyEntity;
 import com.example.myapplication.Laba6.MyFragment;
 import com.google.android.material.button.MaterialButton;
 
 import java.io.Serializable;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         EditText pointsCount = findViewById(R.id.points_count);
         MaterialButton materialButton = findViewById(R.id.material_button);
         MaterialButton materialButtonGenerate = findViewById(R.id.material_button_generate);
+        MaterialButton materialButtonDownload = findViewById(R.id.material_button_download);
         if (savedInstanceState != null) {
             isClosed = savedInstanceState.getBoolean(MY_KEY_CLOSED);
             if (isClosed) {
@@ -101,8 +108,23 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 });
             }
         });
-    }
 
+        materialButtonDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isClosed = true;
+                closeKeyboard(view);
+                cardView.setVisibility(View.INVISIBLE);
+                MyDatabase db = App.getInstance().getDatabase();
+                MyDao dao = db.myDao();
+                List<MyEntity> entity = dao.getAll();
+                openFragment(new ArrayTabulatedFunction(toFunctionArray(entity)));
+                for (int i = 0; i < entity.size(); i++) {
+                    dao.delete(entity.get(i));
+                }
+            }
+        });
+    }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -124,4 +146,22 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 .replace(R.id.fragment_container, fragment)
                 .commit();
     }
+
+    private FunctionPoint toFunctionPoint(MyEntity entity) {
+        FunctionPoint fp = new FunctionPoint();
+        fp.setX(entity.getX());
+        fp.setY(entity.getY());
+        return fp;
+    }
+
+    private FunctionPoint[] toFunctionArray(List<MyEntity> entity) {
+        FunctionPoint[] array = new FunctionPoint[entity.size()];
+        for (int i = 0; i < entity.size(); i++) {
+            array[i] = toFunctionPoint(entity.get(i));
+        }
+        return array;
+    }
 }
+
+
+

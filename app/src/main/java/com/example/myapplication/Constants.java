@@ -13,4 +13,5 @@ public class Constants {
     public static final String NULL = "";
     public static final String ARRAY = "array";
     public static final String DIALOG = "dialog";
+    public static final String DATABASE = "database";
 }

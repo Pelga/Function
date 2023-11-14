@@ -1,5 +1,6 @@
 package com.example.myapplication.Laba6;
 
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,11 +56,14 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.TabViewHolder> i
         notifyDataSetChanged();
     }
 
+    public ArrayList<FunctionPoint> getList() {
+        return list;
+    }
+
     public void add(FunctionPoint functionPoint) {
         list.add(functionPoint);
         notifyDataSetChanged();
     }
-
 
     static class TabViewHolder extends RecyclerView.ViewHolder {
 
