@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
+//bd
 @Dao
 public interface MyDao {
     @Query("SELECT * FROM your_table_name")

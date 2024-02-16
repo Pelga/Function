@@ -59,9 +59,7 @@ public class FunctionPoint implements Serializable {
         if (o.getClass() != this.getClass()) {
             return false;
         }
-
         FunctionPoint c = (FunctionPoint) o;
-
         return Double.compare(x, c.x) == 0
                 && Double.compare(y, c.y) == 0;
     }
