@@ -1,4 +1,6 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.data.api;
+
+import com.example.myapplication.Laba6.MyDateNumbers;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

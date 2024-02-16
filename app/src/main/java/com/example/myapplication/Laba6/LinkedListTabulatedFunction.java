@@ -12,9 +12,7 @@ public class LinkedListTabulatedFunction implements Serializable {
     private int lastIndex = -1;
     private double leftX;
     private double rightX;
-
     private double[] values;
-
 
     public LinkedListTabulatedFunction(FunctionPoint[] array) {
         int pointsCount = array.length;
@@ -32,7 +30,6 @@ public class LinkedListTabulatedFunction implements Serializable {
             throw new IllegalArgumentException();
         }
     }
-
 
     public LinkedListTabulatedFunction(double leftX, double rightX, int pointsCount) {
         if (leftX >= rightX && pointsCount < 2) {
@@ -83,17 +80,6 @@ public class LinkedListTabulatedFunction implements Serializable {
         }
     }
 
-
-    public double getLeftDomainBorder() {
-        return leftX;
-    }
-
-
-    public double getRightDomainBorder() {
-        return rightX;
-    }
-
-
     public double[] returnNumb(double x) {
         FunctionNode allLength = head;
         while (allLength.next != null) {
@@ -139,11 +125,9 @@ public class LinkedListTabulatedFunction implements Serializable {
         return allLength.item;
     }
 
-
     public double getPointX(int index) {
         return getPoint(index).getX();
     }
-
 
     public double getPointY(int index) {
         return getPoint(index).getY();
@@ -185,7 +169,6 @@ public class LinkedListTabulatedFunction implements Serializable {
     }
 
     /*******************************************************************************************/
-
 
     public FunctionNode getNodeByIndex(int index) {
         FunctionNode currentElement = head.next;
@@ -250,7 +233,6 @@ public class LinkedListTabulatedFunction implements Serializable {
         deletedNoted.prev = null;
     }
 
-
     @Override
     public String toString() {
         String str = OPEN_ANOTHER;
@@ -290,7 +272,6 @@ public class LinkedListTabulatedFunction implements Serializable {
         }
         return result;
     }
-
 
     @Override
     public Object clone() {
