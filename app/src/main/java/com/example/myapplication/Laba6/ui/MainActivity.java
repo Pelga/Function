@@ -1,4 +1,4 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -71,3 +71,4 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 .commit();
     }
 }
+//тут я ничо не нашла что связано с data

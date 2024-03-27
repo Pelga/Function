@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Laba6.domain;
 
 public class Constants {
     public static final String OPEN = "{ ";

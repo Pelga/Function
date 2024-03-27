@@ -1,4 +1,4 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.domain;
 
 import android.widget.EditText;
 

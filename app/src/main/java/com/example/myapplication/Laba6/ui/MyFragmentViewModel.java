@@ -1,20 +1,26 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.ui;
 
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.myapplication.Laba6.data.MyRepository;
 import com.example.myapplication.Laba6.domain.ArrayTabulatedFunction;
+import com.example.myapplication.Laba6.domain.FunctionPoint;
+import com.example.myapplication.Laba6.domain.MyUseCase;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-//ui
 public class MyFragmentViewModel extends ViewModel {
     private final MutableLiveData<Integer> makeToastLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayTabulatedFunction> arrayTabulatedFunctionMutableLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> openDialogFragmentLiveData = new MutableLiveData<>();
+    private final MyRepository myRepository = new MyRepository();
+    private final MyUseCase useCase = new MyUseCase(myRepository);
+
+
     public LiveData<Integer> getMakeToastLiveData() {
         return makeToastLiveData;
     }
@@ -36,13 +42,7 @@ public class MyFragmentViewModel extends ViewModel {
     }
 
     public void buttonDatabasePressed(ArrayList<FunctionPoint> list) {
-        MyDatabase database = App.getInstance().getDatabase();
-        MyDao dao = database.myDao();
-        ArrayList<FunctionPoint> tabList = list;
-        for (int i = 0; i < tabList.size(); i++) {
-            MyEntity entity = new MyEntity(tabList.get(i).getX(), tabList.get(i).getY());
-            dao.insert(entity);
-        }
+        useCase.getButtonDatabasePressed(list);
         createToast();
     }
 
@@ -63,6 +63,8 @@ public class MyFragmentViewModel extends ViewModel {
         arrayTabulatedFunctionMutableLiveData.setValue(array);
     }
 }
+
+
 
 
 

@@ -1,10 +1,10 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.ui;
 
-import static com.example.myapplication.Constants.CANCEL;
-import static com.example.myapplication.Constants.DIALOG_TITLE;
-import static com.example.myapplication.Constants.NULL;
-import static com.example.myapplication.Constants.OK;
-import static com.example.myapplication.Laba6.MyString.toStr;
+import static com.example.myapplication.Laba6.domain.Constants.CANCEL;
+import static com.example.myapplication.Laba6.domain.Constants.DIALOG_TITLE;
+import static com.example.myapplication.Laba6.domain.Constants.NULL;
+import static com.example.myapplication.Laba6.domain.Constants.OK;
+import static com.example.myapplication.Laba6.domain.MyString.toStr;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

@@ -1,7 +1,7 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.ui;
 
 
-import static com.example.myapplication.Constants.DIALOG;
+import static com.example.myapplication.Laba6.domain.Constants.DIALOG;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

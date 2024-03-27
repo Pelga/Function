@@ -1,4 +1,4 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.domain.entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

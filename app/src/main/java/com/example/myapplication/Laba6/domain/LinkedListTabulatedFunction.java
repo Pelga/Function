@@ -1,9 +1,9 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.domain;
 
 
-import static com.example.myapplication.Constants.CLOSE_ANOTHER;
-import static com.example.myapplication.Constants.COMMA;
-import static com.example.myapplication.Constants.OPEN_ANOTHER;
+import static com.example.myapplication.Laba6.domain.Constants.CLOSE_ANOTHER;
+import static com.example.myapplication.Laba6.domain.Constants.COMMA;
+import static com.example.myapplication.Laba6.domain.Constants.OPEN_ANOTHER;
 
 import java.io.Serializable;
 
