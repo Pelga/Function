@@ -1,10 +1,8 @@
 package com.example.myapplication.Laba6.domain;
 
-import static com.example.myapplication.Constants.CLOSE;
-import static com.example.myapplication.Constants.COMMA;
-import static com.example.myapplication.Constants.OPEN;
-
-import com.example.myapplication.Laba6.FunctionPoint;
+import static com.example.myapplication.Laba6.domain.Constants.CLOSE;
+import static com.example.myapplication.Laba6.domain.Constants.COMMA;
+import static com.example.myapplication.Laba6.domain.Constants.OPEN;
 
 import java.io.Serializable;
 

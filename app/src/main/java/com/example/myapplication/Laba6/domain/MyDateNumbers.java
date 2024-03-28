@@ -1,9 +1,6 @@
-package com.example.myapplication.Laba6;
-
-import com.google.gson.annotations.SerializedName;
+package com.example.myapplication.Laba6.domain;
 
 public class MyDateNumbers {
-    @SerializedName("numbers")
     private FunctionPoint[] numbers;
 
     public MyDateNumbers(FunctionPoint[] numbers) {
@@ -18,3 +15,4 @@ public class MyDateNumbers {
         this.numbers = numbers;
     }
 }
+

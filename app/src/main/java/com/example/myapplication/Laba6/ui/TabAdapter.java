@@ -1,4 +1,4 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.ui;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Laba6.domain.ArrayTabulatedFunction;
+import com.example.myapplication.Laba6.domain.FunctionPoint;
 import com.example.myapplication.R;
 
 import java.io.Serializable;

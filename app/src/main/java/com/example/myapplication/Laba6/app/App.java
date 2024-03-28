@@ -1,10 +1,12 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.app;
 
-import static com.example.myapplication.Constants.DATABASE;
+import static com.example.myapplication.Laba6.domain.Constants.DATABASE;
 
 import android.app.Application;
 
 import androidx.room.Room;
+
+import com.example.myapplication.Laba6.data.MyDatabase;
 
 public class App extends Application {
     private static App instance;

@@ -1,7 +1,7 @@
-package com.example.myapplication.Laba6;
+package com.example.myapplication.Laba6.ui;
 
 
-import static com.example.myapplication.Constants.DIALOG;
+import static com.example.myapplication.Laba6.domain.Constants.DIALOG;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,33 +38,11 @@ public class MyFragment extends Fragment implements Serializable {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view2);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myFragmentViewModel = new ViewModelProvider(requireActivity()).get(MyFragmentViewModel.class);
         if (array != null) {
             myFragmentViewModel.setArrayTabulatedFunction(array);
         }
-        tabAdapter = new TabAdapter();
-        recyclerView.setAdapter(tabAdapter);
-
-        myFragmentViewModel.getArrayTabulatedFunctionMutableLiveData().observe(getViewLifecycleOwner(),
-                array -> tabAdapter.saveList(array));
-
-        myFragmentViewModel.getOpenDialogFragmentLiveData().observe(getViewLifecycleOwner(), b -> openDialog());
-
-        FloatingActionButton addButton = view.findViewById(R.id.add_button);
-        Button buttonDatabase = view.findViewById(R.id.button_database);
-
-        myFragmentViewModel.getMakeToastLiveData().observe(
-                getViewLifecycleOwner(),
-                string -> Toast.makeText(requireContext(), string, Toast.LENGTH_LONG).show()
-        );
-
-        addButton.setOnClickListener(view1 -> {
-            myFragmentViewModel.addButtonPressed(false);
-        });
-
-        buttonDatabase.setOnClickListener(view1 -> myFragmentViewModel.buttonDatabasePressed(tabAdapter.getList()));
+        observeFragmentViewModel(view);
         return view;
     }
 
@@ -84,5 +62,31 @@ public class MyFragment extends Fragment implements Serializable {
             myDialogFragment.dismiss();
         }
     }
+
+    public void observeFragmentViewModel(View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view2);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        tabAdapter = new TabAdapter();
+        recyclerView.setAdapter(tabAdapter);
+
+        myFragmentViewModel.getArrayTabulatedFunctionMutableLiveData().observe(getViewLifecycleOwner(),
+                array -> tabAdapter.saveList(array));
+
+        myFragmentViewModel.getOpenDialogFragmentLiveData().observe(getViewLifecycleOwner(), b -> openDialog());
+
+        FloatingActionButton addButton = view.findViewById(R.id.add_button);
+        Button buttonDatabase = view.findViewById(R.id.button_database);
+
+        myFragmentViewModel.getMakeToastLiveData().observe(
+                getViewLifecycleOwner(),
+                string -> Toast.makeText(requireContext(), string, Toast.LENGTH_LONG).show()
+        );
+
+        addButton.setOnClickListener(view1 -> {
+            myFragmentViewModel.addButtonPressed(false);
+        });
+        buttonDatabase.setOnClickListener(view1 -> myFragmentViewModel.buttonDatabasePressed(tabAdapter.getList()));
+    }
 }
+
 
