@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.myapplication.Laba6.data.MyRepository;
+import com.example.myapplication.Laba6.data.TabulatedFunctionRepository;
 import com.example.myapplication.Laba6.domain.ArrayTabulatedFunction;
 import com.example.myapplication.Laba6.domain.FunctionPoint;
-import com.example.myapplication.Laba6.domain.MyUseCase;
+import com.example.myapplication.Laba6.domain.TabulatedFunctionUseCase;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
@@ -17,8 +17,8 @@ public class MyFragmentViewModel extends ViewModel {
     private final MutableLiveData<Integer> makeToastLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayTabulatedFunction> arrayTabulatedFunctionMutableLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> openDialogFragmentLiveData = new MutableLiveData<>();
-    private final MyRepository myRepository = new MyRepository();
-    private final MyUseCase useCase = new MyUseCase(myRepository);
+    private final TabulatedFunctionRepository myRepository = new TabulatedFunctionRepository();
+    private final TabulatedFunctionUseCase useCase = new TabulatedFunctionUseCase(myRepository);
 
 
     public LiveData<Integer> getMakeToastLiveData() {

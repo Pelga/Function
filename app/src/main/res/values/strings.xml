@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="error">Left and right</string>
+    <string name="failure">Ошибка при получении данных</string>
     <string name="saved">tabulated function saved</string>
     <string name="point">поинт</string>
     <string name="left_domain_border">left domain border</string>

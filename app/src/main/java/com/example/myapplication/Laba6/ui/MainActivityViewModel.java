@@ -11,9 +11,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.myapplication.Laba6.data.MyRepository;
+import com.example.myapplication.Laba6.data.TabulatedFunctionRepository;
 import com.example.myapplication.Laba6.domain.ArrayTabulatedFunction;
-import com.example.myapplication.Laba6.domain.MyUseCase;
+import com.example.myapplication.Laba6.domain.TabulatedFunctionUseCase;
 import com.example.myapplication.R;
 
 public class MainActivityViewModel extends ViewModel {
@@ -22,8 +22,8 @@ public class MainActivityViewModel extends ViewModel {
     private final MutableLiveData<View> closeKeyboardLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> visibilityLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> closeCardViewLiveData = new MutableLiveData<>();
-    private final MyRepository myRepository = new MyRepository();
-    private final MyUseCase useCase = new MyUseCase(myRepository);
+    private final TabulatedFunctionRepository myRepository = new TabulatedFunctionRepository();
+    private final TabulatedFunctionUseCase useCase = new TabulatedFunctionUseCase(myRepository);
 
     public LiveData<ArrayTabulatedFunction> getArrayTabulatedFunctionLiveData() {
         return arrayTabulatedFunctionLiveData;
@@ -83,8 +83,12 @@ public class MainActivityViewModel extends ViewModel {
         makeErrorToastLiveData.setValue(R.string.error);
     }
 
+    public void createFailureToast() {
+        makeErrorToastLiveData.setValue(R.string.failure);
+    }
+
     public void createTabulatedFunctionByRequest() {
-        useCase.getArrayTabulatedFunction(new MyUseCase.MyUseCaseCallback() {
+        useCase.getArrayTabulatedFunction(new TabulatedFunctionUseCase.TabulatedFunctionUseCaseCallback() {
             @Override
             public void onSuccess(ArrayTabulatedFunction arrayTabulatedFunction) {
                 arrayTabulatedFunctionLiveData.setValue(arrayTabulatedFunction);
@@ -92,8 +96,7 @@ public class MainActivityViewModel extends ViewModel {
 
             @Override
             public void onFailure(Throwable throwable) {
-                System.err.println("Ошибка при получении данных" + throwable.getMessage());
-
+                createFailureToast();
             }
         });
     }
@@ -101,6 +104,5 @@ public class MainActivityViewModel extends ViewModel {
     public void createTabulatedFunctionByDatabase() {
         arrayTabulatedFunctionLiveData.setValue(useCase.getArrayTabulatedFunctionDataBase());
     }
-
 }
 

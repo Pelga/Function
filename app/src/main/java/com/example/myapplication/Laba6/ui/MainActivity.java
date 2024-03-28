@@ -19,12 +19,31 @@ import com.google.android.material.button.MaterialButton;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
-    private MainActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        observeViewModel();
+    }
+
+    private void closeKeyboard(View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    private void openFragment(ArrayTabulatedFunction arrayTabulatedFunction) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        MyFragment fragment = new MyFragment(arrayTabulatedFunction);
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
+    }
+
+    public void observeViewModel() {
+        MainActivityViewModel viewModel;
         CardView cardView = findViewById(R.id.card);
         EditText leftDomainBorder = findViewById(R.id.right_domain_border);
         EditText rightDomainBorder = findViewById(R.id.left_domain_border);
@@ -55,20 +74,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             viewModel.materialButtonDownloadPressed(view, View.INVISIBLE, true);
         });
     }
-
-    private void closeKeyboard(View view) {
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
-    private void openFragment(ArrayTabulatedFunction arrayTabulatedFunction) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        MyFragment fragment = new MyFragment(arrayTabulatedFunction);
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .commit();
-    }
 }
-//тут я ничо не нашла что связано с data
+
+

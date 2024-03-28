@@ -1,10 +1,8 @@
 package com.example.myapplication.Laba6.data;
 
-import android.util.Log;
-
 import com.example.myapplication.Laba6.app.App;
 import com.example.myapplication.Laba6.data.api.MyAPI;
-import com.example.myapplication.Laba6.data.retrofit.MyRepositoryCallback;
+import com.example.myapplication.Laba6.data.retrofit.TabulatedFunctionRepositoryCallback;
 import com.example.myapplication.Laba6.domain.ArrayTabulatedFunction;
 import com.example.myapplication.Laba6.domain.FunctionPoint;
 import com.example.myapplication.Laba6.domain.MyDateNumbers;
@@ -19,55 +17,36 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MyRepository {
+public class TabulatedFunctionRepository {
     private static final String BASE_URL = "https://run.mocky.io/";
     private MyDateNumbers data;
 
-    public void createTabulatedFunctionByRequest(MyRepositoryCallback myRepositoryCallback) {
-        //1)при вызове чужого класса результат получаем в callback в аргументах callback
-        //2)тк мы получаем результат в callback, мы не можем использовать return, тк callback работает ассинхронно
-        //2.1)все callback работаю ассинхронно и ни в каком нельзя использовать ретерн
-        //3)делаем метод void и передаем результат с помощью нового callback
+    public void createTabulatedFunctionByRequest(TabulatedFunctionRepositoryCallback myRepositoryCallback) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        //создание объекта ретрофит для работы с сетью
         MyAPI apiService = retrofit.create(MyAPI.class);
-        //экземпляр апи
         Call<MyDateNumbers> call = apiService.getMyData();
-        //вызов метода апи для получения данных
         call.enqueue(new Callback<MyDateNumbers>() {
-            //метод enqueue для асинхронного запроса
-            //в качестве параметра метода передается экзампрял нового анонимного класса,
-            // которые определяет поведение в случае успешного ответа или ошибки
             @Override
             public void onResponse(Call<MyDateNumbers> call, Response<MyDateNumbers> response) {
-                Log.d("a", "aaa");
                 ArrayTabulatedFunction arrayTabulatedFunction;
-                //переменная atf
-                if (response.isSuccessful()) { //
-                    Log.d("a", "ccc");
-                    //проверка на успешность ответа от сервера
+                if (response.isSuccessful()) {
                     data = response.body();
-                    //если успешно, сохраняется в data
                     assert data != null;
-                    //проверяется что data не равна налл
                     arrayTabulatedFunction = new ArrayTabulatedFunction(data.getNumbers());
-                    //создается atf на основе данных из data
                     myRepositoryCallback.onSuccess(arrayTabulatedFunction);
-                    //вызывает метода onSuccess  из callback maRepisitoryCallback передавая ему созданных ебъект atf
+                } else {
+                    myRepositoryCallback.onFailure(new Throwable("error response"));
                 }
             }
-            //в случае успешного ответа создает arraytabfun на основе полученных данных
 
             @Override
             public void onFailure(Call<MyDateNumbers> call, Throwable t) {
-                Log.d("a", "bbb");
                 call.cancel();
                 myRepositoryCallback.onFailure(t);
-                //в случае ошибки вызывает метод onFailure из callback maRepisitoryCallback, передавая ему информацию об ошибке
             }
         });
     }
